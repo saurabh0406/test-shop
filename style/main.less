@@ -1,48 +1,239 @@
+@maroon: #aa6708;
+@lightGrey: #ddd;
+@blue: #2199e8;
+
+.h-w(@height, @width){
+	height: @height;
+	width: @width;
+}
+
 html {
-    height: 100%;
-    width: 100%;
+	.h-w(100%, 100%);
     body {
-        height: 100%;
-        width: 100%;
+        .h-w(100%, 100%);
         #container {
-            height: 100%;
-            width: 100%;
-            nav{
-            	height:60px;
-            	width:100%;
-            	text-align:center;
+            .h-w(100%, 100%);
+            nav {
+            	.h-w(60px, 100%);
+                text-align: center;
+                position: absolute;
+                top: 5px;
+                left: 5px;
             }
-            .btn {
+            nav .btn {
                 display: inline-block;
-                width: 300px;
-                height: 40px;
-                background-color: #2199e8;
+                .h-w(40px, 300px);
                 padding: 10px;
                 text-align: center;
                 line-height: 40px;
                 font-size: 18px;
                 font-weight: bold;
                 cursor: pointer;
+                color: #000;
+                background-color: #1179BD;
                 &:hover {
                     background-color: #1583cc;
                 }
-                &.btn-seller {
+                &.active {
                     color: #fff;
-                }
-                &.btn-customer {
-                    color: #000;
+                    background-color: @blue;
+                    &:hover {
+                        background-color: #1583cc;
+                    }
                 }
             }
+            #seller-section {
+                display: none;
+                .h-w(100%, 100%);
+                padding-top: 80px;
+                box-sizing: border-box;
+                &.active{
+                	display:block;
+                }
+                .seller-listing-tile {
+                    .h-w(100px, 80%);
+                    margin: 5px auto;
+                    > div > div {
+                        display: inline-block;
+                        box-sizing: border-box;
+                        padding: 5px;
+                        height: 100%;
+                        vertical-align: top;
+                        background-color: @lightGrey;
+                        border: 1px solid #888;
+                        &.col-1 {
+                            width: 65%;
+                        }
+                        &.col-2 {
+                            width: 15%;
+                        }
+                        &.col-3 {
+                            width: 18%;
+                            line-height: 100px;
+                            .btn{
+                            	display:inline-block;
+                            	.h-w(40px, 49%);
+                            	background-color: @blue;
+                            	line-height: 40px;
+                            	text-align: center;
+                            	vertical-align: middle;
+                            	cursor: pointer;
+                            }
+                        }
+                    }
+                    .seller-listing-view {
+                    	height: 100%;
+                    	display:none;
+                    	&.active{
+	                    	display:block;
+	                    }
+                    	.col-1{
+                    		.title{
+                    			color: @maroon;
+                    			font-size: 19px;
+                    			font-weight: bold;
+                    		}
+                    		.description{
+                    			color: #1b809e;
+                    		}
+                    	}
+                    	.col-2{
+                    		text-align: center;
+                    		.price{
+                    			font-size: 35px;
+                    		}
+                    		.max-quantity{
+                    			font-size: 20px;
+                    		}
+                    	}
+                    	.col-3{
 
-            #seller-section{
-            	display:none;
-            	height:100%;
-            	width:100%;
+                    	}
+                    }
+                    .seller-listing-edit {
+                    	height: 100%;
+                    	display:none;
+                    	&.active{
+	                    	display:block;
+	                    }
+                    	.col-1{
+                    		input[type="text"]{
+                    			.h-w(20px, 99%);
+                    			margin: 0 auto;
+                    		}
+                    		textarea{
+                    			.h-w(50px, 99%);
+                    			margin: 0 auto;
+                    			margin-top:5px;
+                    		}
+                    	}
+                    	.col-2{
+                    		.price{
+                    			.h-w(40px, 98%);
+                    		}
+                    		.max-quantity{
+                    			.h-w(20px, 98%);
+                    		}
+                    	}
+                    }
+                }
+                .frm-add-listing{
+                	.h-w(100px, 80%);
+                	margin: 0 auto;
+                	> div{
+                		display:inline-block;
+                		box-sizing: border-box;
+                        padding: 5px;
+                        height: 100%;
+                        vertical-align: top;
+                        border: 1px solid #888;
+                        background-color: #ccc;
+                	}
+                	.col-1 {
+                        width: 65%;
+                        input[type="text"]{
+                        	.h-w(20px, 99%);
+                			margin: 0 auto;
+                		}
+                		textarea{
+                			.h-w(50px, 99%);
+                			margin: 0 auto;
+                			margin-top:5px;
+                		}
+                    }
+                    .col-2 {
+                        width: 15%;
+                        .price{
+                        	.h-w(40px, 98%);
+                    		}
+                    		.max-quantity{
+                    			.h-w(20px, 98%);
+                    		}
+                    }
+                    .col-3 {
+                        width: 18%;
+                        line-height: 100px;
+                        .btn{
+                        	display:inline-block;
+                        	.h-w(40px, 99%);
+                        	background-color: @blue;
+                        	line-height: 40px;
+                        	text-align: center;
+                        	vertical-align: middle;
+                        	cursor: pointer;
+                        }
+                    }
+                }
             }
-            #customer-section{
-            	display:none;
-            	height:100%;
-            	width:100%;
+            #customer-section {
+                display: none;
+                .h-w(100%, 100%);
+                padding-top: 80px;
+                box-sizing: border-box;
+                &.active{
+                	display:block;
+                }
+                .product-tiles{
+                	width: 80%;
+                	margin: 0 auto;
+                	border: content-box;
+                	.product-tile{
+                		.h-w(250px, 31%);
+	                	min-width: 300px;
+					    display: inline-block;
+					    background-color: @lightGrey;
+					    margin: 10px;
+					    padding: 10px;
+					    box-sizing: border-box;
+					    vertical-align: top;
+					    .title{
+					    	color: @maroon;
+                			font-size: 20px;
+                			font-weight: bold;
+                			.h-w(50px, 80%);
+                			display:inline-block;
+					    }
+					    .price{
+					    	.h-w(50px, 15%);
+					    	text-align: right;
+					    	font-size: 30px;
+					    	font-weight: bold;
+					    	display:inline-block;
+					    	vertical-align:top;
+					    }
+					    .description{
+					    	width: 80%;
+					    	display:inline-block;
+					    }
+					    .max-quantity{
+					    	width: 15%;
+					    	text-align: right;
+					    	display:inline-block;
+					    	vertical-align:top;
+					    }
+	                }
+                }
+                
             }
         }
     }

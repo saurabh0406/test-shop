@@ -7,17 +7,92 @@
   <body>
   	<div id="container">
   		<nav>
-  			<div class="btn btn-seller">Manage your listings</div>
+  			<div class="btn btn-seller active">Manage your listings</div>
 	  		<div class="btn btn-customer">View Products</div>
 	  	</nav> 		
 
-  		<div id="seller-section">
-
+  		<div id="seller-section" class="active">
+  			
+  			<div class="frm-add-listing">
+  				<div class="col-1">
+					<input type="text" class="title" placeholder="Product Title" maxlength="500"/>
+					<textarea class="description" placeholder="Product Description" maxlength="2500"></textarea>
+				</div>
+				<div class="col-2">
+					<input class="price" type="number" placeholder="Product Price" maxlength="6"/>
+					<input class="max-quantity" type="number" placeholder="Max Quantity" maxlength="3"/>
+				</div>
+				<div class="col-3">
+					<div class="btn add-listing">ADD Listing</div>
+				</div>
+  			</div>
+  			<div class="seller-listings">
+ 
+  			</div>
   		</div>
   		<div id="customer-section">
+  			<div class="product-tiles">
 
+  			</div>
   		</div>
   	</div>
+
+
+
+
+
+
+
+
+
+
+
+  	<!-- Templates -->
+  	<template id="listing-tile">
+  		<div class="seller-listing-tile">
+	  		<div class="seller-listing-view active">
+				<div class="col-1">
+					<div class="title"></div>
+					<div class="description"></div>
+				</div>
+				<div class="col-2">
+					<div class="price"></div>
+					<div class="max-quantity"></div>
+				</div>
+				<div class="col-3">
+					<div class="btn edit">
+						Edit
+					</div>
+					<div class="btn delete">
+						Delete
+					</div>
+				</div>
+			</div>
+			<div class="seller-listing-edit">
+				<div class="col-1">
+					<input type="text" class="title" placeholder="Product Title" maxlength="500"/>
+					<textarea class="description" placeholder="Product Description" maxlength="2500"></textarea>
+				</div>
+				<div class="col-2">
+					<input class="price" type="number" placeholder="Product Price" maxlength="6"/>
+					<input class="max-quantity" type="number" placeholder="Max Quantity" maxlength="6"/>
+				</div>
+				<div class="col-3">
+					<div class="btn save">Save</div>
+					<div class="btn cancel">Cancel</div>
+				</div>
+			</div>
+		</div>
+  	</template>
+  	<template id="product-tile">
+  		<div class="product-tile">
+  			<div class="title"></div>
+  			<div class="price"></div>
+  			<div class="description"></div>
+  			<div class="max-quantity"></div>
+  		</div>
+  	</template>
+  	<!-- /Templates -->
   	<script data-main="script/config.js" src="script/libs/require.js"></script>
   </body>
 </html>
