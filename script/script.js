@@ -1,6 +1,6 @@
 require(['jquery'], function($, amd) {
     //anything on initialization
-    var self = {}, renderProductTiles, updateProductTiles, updateLocalStorage, getValues, bindEvents;
+    var self = {}, renderProductTiles, updateProductTiles, getValues, bindEvents;
     self.data = null;
 
     renderProductTiles = function(productData) {
@@ -56,7 +56,7 @@ require(['jquery'], function($, amd) {
         $productTile.find('.max-quantity').text(obj.maxQuantity);
     }
 
-    updateLocalStorage = function() {
+    self.updateLocalStorage = function() {
         window.localStorage.setItem("testShopCartData", JSON.stringify(self.data));
     }
 
@@ -99,7 +99,8 @@ require(['jquery'], function($, amd) {
                     if (self.data.productData[i].pId == productId) {
                         self.data.productData.splice(i, 1);
                         $(this).parents('.seller-listing-tile').remove();
-                        updateLocalStorage();
+                        $('.product-tiles').find('[data-pid="' + productId + '"]').remove();
+                        self.updateLocalStorage();
                     }
                 }
             });
@@ -117,7 +118,7 @@ require(['jquery'], function($, amd) {
                     if (self.data.productData[i].pId == productId) {
                         getValues($edit, self.data.productData[i]);
                         updateProductTiles(self.data.productData[i], productId, $view);
-                        updateLocalStorage();
+                        self.updateLocalStorage();
                     }
                 }
                 $(this).parents('.seller-listing-tile').find('.seller-listing-view').addClass('active').parent().find('.seller-listing-edit').removeClass('active');
@@ -127,12 +128,11 @@ require(['jquery'], function($, amd) {
             	//this method binds addition of a listing row .
                 $('.frm-add-listing .btn.add-listing').on('click', function() {
                     var ret = getValues($('.frm-add-listing'));
-
                     if (ret.title && ret.desc && ret.price && ret.maxQuantity) {
                         //values exist
                         ret.pId = new Date().getTime();
                         self.data.productData.push(ret);
-                        updateLocalStorage();
+                        self.updateLocalStorage();
                         renderProductTiles([ret]);
                         $('.frm-add-listing').find('input').val('');
                         $('.frm-add-listing').find('textarea').val('');
@@ -159,10 +159,17 @@ require(['jquery'], function($, amd) {
 
         */
         self.data = JSON.parse(window.localStorage.getItem("testShopCartData"));
-
-        renderProductTiles(self.data.productData);
+        if(self.data && self.data.productData.length){
+        	renderProductTiles(self.data.productData);
+        }
+        else{//if data doesn't exist, set up empty array
+        	self.data = {
+        		productData:[]
+        	}
+        }
         bindEvents();
     };
     self.init();
+    return self;
 
 })
