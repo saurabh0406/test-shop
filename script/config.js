@@ -7,7 +7,9 @@ require.config({
 	baseUrl: 'script',
 	callback: function(){
 		//calling script js
-		require(['script'])
+		require(["script"], function(src){
+			src.init();
+		});
 	},
 	paths:{
 		jquery: 'libs/jquery-2.1.4.min'

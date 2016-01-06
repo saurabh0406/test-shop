@@ -1,6 +1,7 @@
-require(['jquery'], function($, amd) {
+define(['jquery'], function($, amd) {
     //anything on initialization
-    var self = {}, renderProductTiles, updateProductTiles, getValues, bindEvents;
+    var self = {},
+        renderProductTiles, updateProductTiles, getValues, bindEvents;
     self.data = null;
 
     renderProductTiles = function(productData) {
@@ -41,14 +42,14 @@ require(['jquery'], function($, amd) {
     };
 
     updateProductTiles = function(obj, pId, $view) {
-    	//this function updates the listing as well as product detail tiles
-    	var $productTile; 
+        //this function updates the listing as well as product detail tiles
+        var $productTile;
 
         $view.find('.title').text(obj.title);
         $view.find('.description').text(obj.desc);
         $view.find('.price').text(obj.price);
         $view.find('.max-quantity').text(obj.maxQuantity);
-        
+
         $productTile = $('.product-tiles').find('[data-pid="' + pId + '"]');
         $productTile.find('.title').text(obj.title);
         $productTile.find('.description').text(obj.desc);
@@ -72,7 +73,7 @@ require(['jquery'], function($, amd) {
 
     bindEvents = function() {
         (function bindListingAndProductView() {
-        	//This self executing function binds seller and customer buttons
+            //This self executing function binds seller and customer buttons
             $('.btn.btn-seller').click(function() {
                 $('.btn.btn-customer').removeClass('active');
                 $('.btn.btn-seller').addClass('active');
@@ -89,7 +90,7 @@ require(['jquery'], function($, amd) {
         }());
 
         (function bindEditDelete() {
-        	//this function binds edit and delete methods to respective buttons
+            //this function binds edit and delete methods to respective buttons
             $('.seller-listings').on('click', '.btn.edit', function() {
                 $(this).parents('.seller-listing-tile').find('.seller-listing-view').removeClass('active').parent().find('.seller-listing-edit').addClass('active');
             });
@@ -107,9 +108,9 @@ require(['jquery'], function($, amd) {
         }());
 
         (function bindSaveCancel() {
-        	//this method binds save and cancel
+            //this method binds save and cancel
             $('.seller-listings').on('click', '.btn.save', function() {
-            	var $edit, $view, productId;
+                var $edit, $view, productId;
 
                 $edit = $(this).parents('.seller-listing-edit');
                 $view = $(this).parents('.seller-listing-tile').find('.seller-listing-view');
@@ -125,7 +126,7 @@ require(['jquery'], function($, amd) {
             });
 
             (function bindAdd() {
-            	//this method binds addition of a listing row .
+                //this method binds addition of a listing row .
                 $('.frm-add-listing .btn.add-listing').on('click', function() {
                     var ret = getValues($('.frm-add-listing'));
                     if (ret.title && ret.desc && ret.price && ret.maxQuantity) {
@@ -159,17 +160,14 @@ require(['jquery'], function($, amd) {
 
         */
         self.data = JSON.parse(window.localStorage.getItem("testShopCartData"));
-        if(self.data && self.data.productData.length){
-        	renderProductTiles(self.data.productData);
-        }
-        else{//if data doesn't exist, set up empty array
-        	self.data = {
-        		productData:[]
-        	}
+        if (self.data && self.data.productData.length) {
+            renderProductTiles(self.data.productData);
+        } else { //if data doesn't exist, set up empty array
+            self.data = {
+                productData: []
+            }
         }
         bindEvents();
     };
-    self.init();
     return self;
-
-})
+});
